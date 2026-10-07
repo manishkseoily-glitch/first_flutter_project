@@ -5,11 +5,12 @@ class HomeBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      width: double.infinity,
-      child: Center(
-        child: Text("manish"),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 500,
+        width: double.infinity,
+        child: Center(child: Text("Manish")),
       ),
     );
   }

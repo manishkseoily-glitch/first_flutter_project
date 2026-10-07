@@ -1,4 +1,4 @@
-import 'package:first_project/pages/home_page.dart';
+import 'package:first_project/pages/get_start_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:HomePage(),
+      home:GetStartPage(),
     );
   }
 }
