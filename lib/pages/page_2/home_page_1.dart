@@ -75,7 +75,7 @@ class _HomePage1State extends State<HomePage1> {
               ),
             ),
           ),
-          pages[changeIndex],
+          Expanded(child: pages[changeIndex]),
         ],
       ),
     );

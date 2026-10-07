@@ -8,6 +8,7 @@ class About extends StatelessWidget {
     return Column(
       children: [
         Text("About Page"),
+        // use wrap
         Wrap(
           spacing: 10,
           runSpacing: 10,
