@@ -1,3 +1,4 @@
+import 'package:first_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,16 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.yellow,
-          centerTitle: true,
-          title: Text("app bar"),
-        ),
-        body: Center(
-          child: Text("hello flutter"),
-        ),
-      ),
+      home:HomePage(),
     );
   }
 }
