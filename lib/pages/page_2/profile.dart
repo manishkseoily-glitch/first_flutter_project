@@ -5,18 +5,20 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: GridView.count(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          GridView.count(
+            shrinkWrap: true,
             crossAxisCount: 4,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             childAspectRatio: 1.5,
+            physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.all(10),
             children: [
               Card(
-                  child: Text("manish")
+                  child: Text("Manish Malhi")
               ),
               Container(color: Colors.blue),
               Container(color: Colors.green),
@@ -25,13 +27,10 @@ class Profile extends StatelessWidget {
               Container(color: Colors.red),
               Container(color: Colors.orange),
               Container(color: Colors.blue),
-
             ],
           ),
-        ),
-
-        Expanded(
-          child: Row(
+      
+          Row(
             children: [
               Expanded(
                 child: Container(
@@ -42,6 +41,7 @@ class Profile extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.count(
+                      shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
@@ -56,9 +56,9 @@ class Profile extends StatelessWidget {
                   ),
                 ),
               ),
-
+      
               SizedBox(width: 10),
-
+      
               Expanded(
                 child: Container(
                   color: Colors.grey,
@@ -66,6 +66,7 @@ class Profile extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.count(
                       physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
@@ -81,9 +82,11 @@ class Profile extends StatelessWidget {
               ),
             ],
           ),
-        )
 
-      ],
+          SizedBox(height: 200,),
+          Text("manish ")
+        ],
+      ),
     );
   }
 }

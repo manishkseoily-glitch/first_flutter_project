@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                           border: Border.all(color: Colors.grey,width: 2),
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: AssetImage("asset/images/anime_image.jpg"),
+                            image: AssetImage("assets/images/anime_image.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),

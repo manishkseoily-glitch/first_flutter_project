@@ -5,7 +5,7 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return  Column(
       children: [
         Text("About Page"),
         // use wrap

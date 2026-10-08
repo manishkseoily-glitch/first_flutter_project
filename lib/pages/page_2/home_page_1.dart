@@ -14,6 +14,7 @@ class _HomePage1State extends State<HomePage1> {
   List pagesName = ["Home", "About", "Profile"];
   List<Widget> pages = [Home(), About(), Profile()];
   int changeIndex = 0;
+  int bottomBarIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +78,106 @@ class _HomePage1State extends State<HomePage1> {
           ),
           Expanded(child: pages[changeIndex]),
         ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            gradient: LinearGradient(colors: [
+              Colors.blue,
+              Colors.blue.shade900,
+            ]),
+          ),
+          width: double.infinity,
+          height: 70,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15,right: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Container(
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(10),
+                     color: bottomBarIndex ==0?Colors.transparent.withAlpha(70):Colors.transparent,
+                   ),
+                   child: InkWell(
+                     onTap: (){
+                       setState(() {
+                         bottomBarIndex =0;
+                       });
+                     },
+                     child: Padding(
+                       padding: const EdgeInsets.only(left: 20, right: 20,top: 10,),
+                       child: Column(
+                         children: [
+                           Icon(Icons.home, size: 20,color: Colors.white,),
+                           Text("home", style: TextStyle(fontSize: 10),),
+                         ],
+                       ),
+                     ),
+                   ),
+                 ),
+               ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      color: bottomBarIndex ==1?Colors.transparent.withAlpha(70):Colors.transparent,
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          bottomBarIndex =1;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20,top: 10,),
+                        child: Column(
+                          children: [
+                            Icon(Icons.add_box, size: 20,color: Colors.white,),
+                            Text("about", style: TextStyle(fontSize: 10),),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      color: bottomBarIndex ==2?Colors.transparent.withAlpha(70):Colors.transparent,
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          bottomBarIndex =2;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20,top: 10,),
+                        child: Column(
+                          children: [
+                            Icon(Icons.person, size: 20,color: Colors.white,),
+                            Text("profile", style: TextStyle(fontSize: 10),),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
