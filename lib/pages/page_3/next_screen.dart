@@ -1,4 +1,5 @@
 import 'package:first_project/constants/app_colors.dart';
+import 'package:first_project/constants/widgets%20components/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class NextScreen extends StatefulWidget {
@@ -76,10 +77,6 @@ class _NextScreenState extends State<NextScreen> {
           title: Text("Login Page"),
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              ),
               gradient: AppColors.appBarLinearGradientColor,
             ),
           ),
@@ -213,7 +210,7 @@ class _NextScreenState extends State<NextScreen> {
 
                 Align(
                   alignment: Alignment.center,
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       FocusScope.of(context).unfocus();
                       if (formKeyIs.currentState!.validate()) {
@@ -229,26 +226,9 @@ class _NextScreenState extends State<NextScreen> {
                         );
                       }
                     },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: AppColors.linearGradientColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Login ",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    ),
+                    child: ButtonWidget(buttonHeight: 40, title: "Login"),
                   ),
                 ),
-
-
-
-
 
 
               ],

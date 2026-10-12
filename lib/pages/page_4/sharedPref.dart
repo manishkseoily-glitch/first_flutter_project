@@ -14,7 +14,6 @@ class _SharedprefState extends State<Sharedpref> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -58,8 +57,6 @@ class _SharedprefState extends State<Sharedpref> {
     });
     getData();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +102,34 @@ class _SharedprefState extends State<Sharedpref> {
                             ),
                             IconButton(
                               onPressed: () {
-                                deleteData(index);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text('Delete Data?'),
+                                      content: const Text(
+                                        'Are you sure you want to delete this data?',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('No'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            deleteData(index);
+                                            if(mounted){
+                                             Navigator.pop(context);
+                                            }
+                                          },
+                                          child: const Text('Yes'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                               icon: Icon(Icons.delete, color: Colors.red),
                             ),
