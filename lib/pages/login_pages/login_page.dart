@@ -52,10 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.all(8),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(40),
-                              child: Image.asset(
-                                'assets/images/anime_image.jpg',
-                                height: 200,
-                                width: 200,
+                              child: Image.network(
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY2Dst7KYg7YIW9sAp_E1qYGl9UhR4jXlOs5Cx53ZmxQ&s=10',
+                                height: 170,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -175,6 +174,12 @@ class _LoginPageState extends State<LoginPage> {
                                     TextButton(
                                       onPressed: () {},
                                       child: const Text('Register'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: ((context) => GetStartPage(name: "guest"))));
+                                      },
+                                      child: const Text('Skip'),
                                     ),
                                   ],
                                 ),

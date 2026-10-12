@@ -11,41 +11,55 @@ class Sharedpref extends StatefulWidget {
 
 class _SharedprefState extends State<Sharedpref> {
   TextEditingController input = TextEditingController();
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getData();
-  // // }
-  //
-  // @override
-  // void dispose() {
-  //   input.dispose();
-  //   super.dispose();
-  // }
 
-  List<String> dataList = [];
-  String? tempVariable;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  String? addItem;
+  List<String> getDataList = [];
 
   Future<void> addData() async {
-    // final pref = await SharedPreferences.getInstance();
-    tempVariable = input.text.trim();
-    if(tempVariable!.isNotEmpty){
+    final pref = await SharedPreferences.getInstance();
+    getDataList = pref.getStringList("savedData") ?? [];
+    if (input.text.isNotEmpty) {
+      addItem = input.text.trim();
       setState(() {
-        dataList.add(tempVariable!);
-        input.clear();
+        getDataList.add(addItem!);
       });
-      // await pref.setStringList("savedData", dataList);
+      await pref.setStringList("savedData", getDataList);
+    }
+    getData();
+    input.clear();
+    if(mounted){
+      Navigator.pop(context);
     }
   }
-  //
-  // Future<void> getData() async{
-  //   final pref = await SharedPreferences.getInstance();
-  //     final data = pref.getStringList("savedData")?? [];
-  //   setState(() {
-  //     dataList =data;
-  //   });
-  // }
+
+
+  List<String> printList = [];
+
+  Future<void> getData() async {
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      printList = pref.getStringList("savedData") ?? [];
+    });
+  }
+
+  Future<void> deleteData(int index) async {
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      printList = pref.getStringList("savedData") ?? [];
+      printList.removeAt(index);
+      pref.setStringList("savedData", printList);
+    });
+    getData();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,56 +75,108 @@ class _SharedprefState extends State<Sharedpref> {
       ),
       body: Column(
         children: [
-          Text(
-            " Save Data in Shared Preference",
-            style: TextStyle(fontSize: 20),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: input,
-                  decoration: InputDecoration(
-                    hintText: "Save Data",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(width: 1, color: Colors.red),
-                    ),
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  addData();
-                },
-                child: Text("save"),
-              ),
-            ],
-          ),
-
           Expanded(
             child: ListView.builder(
-              itemCount: dataList.length,
+              itemCount: printList.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: Card(
+                    elevation: 10,
+                    child: Container(
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.grey
                       ),
-                      child: Center(child: Text(dataList[index]))),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                printList[index],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                deleteData(index);
+                              },
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
           ),
         ],
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: ((context) {
+              return Column(
+                children: [
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Save Data in Shared Preference",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        TextField(
+                          controller: input,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(onPressed: (){
+                              input.clear();
+                            }, icon: Icon(Icons.clear)),
+                            hintText: "Save Data",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 50,
+                          width: 200,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              addData();
+                            },
+                            child: Text("save", style: TextStyle(fontSize: 20)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }),
+          );
+        },
       ),
     );
   }
